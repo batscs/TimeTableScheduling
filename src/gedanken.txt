@@ -1,0 +1,26 @@
+Wie sollen Events (Veranstaltungen) erstellt werden?
+    Annahme:Es gibt eine Datenbank mit Dozenten + Veranstaltungen
+
+    a) Constraints werden für jedes Event eingesetzt
+
+    b) Events tragen nicht die Constraint information, sondern der TimeTableStuff
+       Events müssten dann wahrscheinlich Information tragen wie:
+        - Dozent
+        - EventType (dass z.B. ein Constraint funktioniert: nicht 2x DM hintereinander)
+
+    Irgendwas fehlt noch für Räume, wie assoziiert man Räume für Events, wie weiß ein
+    Event welche Räume es nehmen kann, welche Räume überhaupt erlaubt sind?
+    Eventuell bei der Erstellung von Events eine Liste mit erlaubten Räumen
+
+    Wie sowas wie Master Vorlesungen nur Montags oder Dienstags?
+    -> Hard Constraints für die Veranstaltungen dass nur Montag oder Dienstag?
+    -> Hard Constraint Master Vorlesung zusammen gruppieren?
+
+Optimierung:
+    Fitness für TimeTable Cachen lassen über eine weitere Klasse
+    Falls es zwei TimeTable Instanzen gibt die aber inhaltlich gleich sind
+        -> hashCode implementieren -> testen ob es überhaupt Zeit spart
+        (Da eventuell das jedes mal prüfen mehr Rechenzeit kostet, und es nur sehr selten hilft)
+
+    Für Timepoints eine Flyweight Factory für Arbeitsspeicher Optimieren?
+
