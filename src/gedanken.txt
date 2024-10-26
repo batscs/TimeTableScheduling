@@ -1,26 +1,23 @@
-Wie sollen Events (Veranstaltungen) erstellt werden?
-    Annahme:Es gibt eine Datenbank mit Dozenten + Veranstaltungen
+Algorithmen für Fitness:
+    - Event Räume beachten (by default alle Räume erlaubt, constraints setzen?)
+    - Event Dozenten beachten (ein Dozent kann nur an einem Ort gleichzeitig sein)
+    - Events eines Studiengangs möglichst "nah" aneinander
+    - Master Vorlesungen nur Montags & Dienstags (sind dann einfach Constraints oder?)
 
-    a) Constraints werden für jedes Event eingesetzt
+Datenbank Tabellen:
+    - Events (Dozent, Name)
+    - Constraints (mit entsprechenden Metadaten)
 
-    b) Events tragen nicht die Constraint information, sondern der TimeTableStuff
-       Events müssten dann wahrscheinlich Information tragen wie:
-        - Dozent
-        - EventType (dass z.B. ein Constraint funktioniert: nicht 2x DM hintereinander)
-
-    Irgendwas fehlt noch für Räume, wie assoziiert man Räume für Events, wie weiß ein
-    Event welche Räume es nehmen kann, welche Räume überhaupt erlaubt sind?
-    Eventuell bei der Erstellung von Events eine Liste mit erlaubten Räumen
-
-    Wie sowas wie Master Vorlesungen nur Montags oder Dienstags?
-    -> Hard Constraints für die Veranstaltungen dass nur Montag oder Dienstag?
-    -> Hard Constraint Master Vorlesung zusammen gruppieren?
+Programme:
+    - Künstliche Daten erzeugen und bereitstellen (als json/xml, oder in Datenbank?)
+    - hier künstliche Daten parsen und verwenden
+    - Ergebnis TimeTable darstellen lassen (erstmal wie soll output format aussehen?)
 
 Optimierung:
-    Fitness für TimeTable Cachen lassen über eine weitere Klasse
-    Falls es zwei TimeTable Instanzen gibt die aber inhaltlich gleich sind
+    - Fitness für TimeTable Cachen lassen über eine weitere Klasse
+      falls es zwei TimeTable Instanzen gibt die aber inhaltlich gleich sind
         -> hashCode implementieren -> testen ob es überhaupt Zeit spart
         (Da eventuell das jedes mal prüfen mehr Rechenzeit kostet, und es nur sehr selten hilft)
 
-    Für Timepoints eine Flyweight Factory für Arbeitsspeicher Optimieren?
+    - Für Timepoints eine Flyweight Factory für Arbeitsspeicher Optimieren?
 
