@@ -2,10 +2,10 @@ import TimeTableStuff.Constraint.Constraint;
 import TimeTableStuff.Constraint.ForbiddenDayConstraint;
 import TimeTableStuff.Constraint.ForbiddenTimeConstraint;
 import TimeTableStuff.Event;
+import TimeTableStuff.Population;
 import TimeTableStuff.TimeTable;
 import TimeTableStuff.Timepoint;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -24,8 +24,12 @@ public class Main_Population {
         Constraint bwlNichtMittwochs = new ForbiddenDayConstraint("bwl", 3);
         Constraint bwlNichtDonnerstags = new ForbiddenDayConstraint("bwl", 4);
 
-        Set<Constraint> hardConstraints = Set.of(matheNichtMorgens);
-        Set<Constraint> softConstraints = Set.of(bwlNichtMontags, bwlNichtDienstags, bwlNichtMittwochs, bwlNichtDonnerstags);
+        Constraint matheNichtMontags = new ForbiddenDayConstraint("mathe", 1);
+
+        Set<Constraint> hardConstraints = Set.of(matheNichtMorgens, matheNichtMontags, bwlNichtMontags);
+        Set<Constraint> softConstraints = Set.of(bwlNichtDienstags, bwlNichtMittwochs, bwlNichtDonnerstags);
+
+        // ******************
 
         Population population = new Population(hardConstraints, softConstraints, mathe, bwl);
 
