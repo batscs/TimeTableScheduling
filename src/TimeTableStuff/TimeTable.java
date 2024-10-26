@@ -7,15 +7,6 @@ import java.util.Set;
 
 public class TimeTable implements Comparable<TimeTable> {
 
-    public static float mutation_rate = 0.05f;
-
-    public static float mutation_add_instruction_rate = 0.01f;
-
-    // dont allow more than x mutations at once
-    public static int mutation_limit = 10;
-
-    public static int default_instruction_size = 10;
-
     private Float fitness = null;
 
     private final Schedule schedule;
@@ -49,10 +40,21 @@ public class TimeTable implements Comparable<TimeTable> {
     }
 
     public TimeTable getOffspring() {
+        // Erstelle eine Kopie des aktuellen TimeTable
         TimeTable copy = copy();
 
-        // TODO mutate
+        // Iteriere durch alle Events im Zeitplan der Kopie
+        for (Event event : copy.schedule.getEvents()) {
+            // Bestimme zufällig, ob das Event mutiert werden soll
+            if (Math.random() < Settings.TIMETABLE_MUTATION_RATE) {
+                // Führe die Mutation durch: setze eine zufällige Zeit
+                Timepoint[] tp = Timepoint.getRandomTimepointPair();
 
+                event.setTime(tp[0], tp[1]);
+            }
+        }
+
+        // Gib den mutierten Nachkommen zurück
         return copy;
     }
 
@@ -116,6 +118,11 @@ public class TimeTable implements Comparable<TimeTable> {
 
     public Set<Constraint> getSoftConstraints() {
         return softConstraints;
+    }
+
+    public boolean isPerfect() {
+        return getHardConstraints().size() == getSatisfiedHardConstraints().size()
+                && getSoftConstraints().size() == getSatisfiedSoftConstraints().size();
     }
 
     public Set<Constraint> getSatisfiedSoftConstraints() {
